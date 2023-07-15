@@ -9,6 +9,8 @@ import { LESSONS_QUERY } from "../../gql/Query";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Lesson from '../../components/Lesson';
+import LinearGradient from 'react-native-linear-gradient'
+import Topic from '../../components/Topic';
 const Home = props => {
     const { data, loading } = useQuery(LESSONS_QUERY);
   
@@ -24,10 +26,10 @@ const {userName,setUserName,setUserLevel, userLevel, language} = useContext(Main
 //   const helloWorldString = translations[language].hello;
 
 
-console.log(data)
-    
+
+    // const colorGradients2 = ['#25196B', '#94D9B4'];
 // let lessons = data.lessons.filter((item) => item.level == userLevel)
-let lessons = data.lessons
+// let lessons = data.lessons
 // let topics = data.lessons.filter((item) => item.level == userLevel).reduce((acc, cur) => {
 //     const existingItem = acc.find(item => cur.topic === item.topic);
 //     if(existingItem) {
@@ -64,28 +66,11 @@ React.useEffect(() => {
             <ScrollView horizontal={true}>
 
                 <HStack space={3} >
-                <Pressable  onPress={() => props.navigation.navigate("List")}>
-                    
-                    <Center h="20" w="20" bg="primary.300" rounded="md" shadow={3}>
-                        <Text>mememmememe</Text>
-                    </Center>
-                    </Pressable>
+               
+               <Topic props={props}/>
+               <Topic props={props}/>
+               <Topic props={props}/>
 
-                    <Center h="20" w="20" bg="primary.300" rounded="md" shadow={3} >
-                        <Text>mememmememe</Text>
-                    </Center>
-
-                    <Center h="20" w="20" bg="primary.300" rounded="md" shadow={3} >
-                        <Text>mememmememe</Text>
-                    </Center>
-
-                    <Center h="20" w="20" bg="primary.300" rounded="md" shadow={3} >
-                        <Text>mememmememe</Text>
-                    </Center>
-
-                    <Center h="20" w="20" bg="primary.300" rounded="md" shadow={3} >
-                        <Text>mememmememe</Text>
-                    </Center>
                    
                 </HStack>
                 </ScrollView>
@@ -96,11 +81,11 @@ React.useEffect(() => {
         <View mt={5} mb={3}>
         <Text fontSize="2xl" color="#595085">Recommendations</Text>
         </View >
-        {
+        {/* {
       lessons.map((lesson)=>
       <Lesson lesson={lesson}/>
       )
-    }
+    } */}
   
         
       
