@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import {  Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select,CheckIcon } from "native-base";
+import {Text, View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select,CheckIcon,Pressable } from "native-base";
 import { MainContext,MainProvider } from '../../Context/MainContext';
+import LinearGradient from 'react-native-linear-gradient'
 const Login = props => {
     const {language, setLanguage, userName, setUserName, userLevel, setUserLevel} = useContext(MainContext);
 
@@ -46,8 +46,8 @@ const Login = props => {
      
         <VStack space={3} mt="3">
           <FormControl>
-            <FormControl.Label>Name</FormControl.Label>
-            <Input onChangeText={text => setUserName(text)}/>
+            <FormControl.Label>Enter your name</FormControl.Label>
+            <Input placeholder='Your name' onChangeText={text => setUserName(text)}/>
           </FormControl>
           {/* <FormControl>
             <FormControl.Label>Phone Number</FormControl.Label>
@@ -63,7 +63,7 @@ const Login = props => {
           </FormControl> */}
 
           {/* <FormControl> */}
-            <FormControl.Label>Level</FormControl.Label>
+            <FormControl.Label>Choose your level</FormControl.Label>
             <Select shadow={2} minWidth={200} selectedValue={userLevel} accessibilityLabel="Choose Level" placeholder="Choose Level" _selectedItem={{
       bg: "teal.600",
       endIcon: <CheckIcon size="5" />
@@ -74,11 +74,28 @@ const Login = props => {
         <Select.Item shadow={2} label="Other" value="Other" />
 
       </Select>
-          {/* </FormControl> */}
-          {/* <Text>Yes, I agree</Text> */}
-          <Button mt="2" borderTopRadius={10} borderBottomLeftRadius={10} colorScheme="indigo" onPress={() => handleSignUp()}>
-            Proceed
-          </Button>
+         
+
+          <Pressable onPress={() => handleSignUp()}>
+          <LinearGradient
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          colors={['#95B6FF', '#4718AD']}
+          style={{
+            paddingLeft: 15,
+            paddingRight: 15,
+            borderBottomLeftRadius:10,
+            borderTopLeftRadius:10,
+            borderTopRightRadius:10,
+            marginTop: 16,
+            height:40
+            }}>
+              <Center mt={1}>
+            <Text color="white" fontSize="xl">Proceed</Text>
+            </Center>
+          </LinearGradient>
+          </Pressable>
+
         </VStack>
       </Box>
     </Center>

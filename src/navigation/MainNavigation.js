@@ -102,11 +102,11 @@ function MainBottomTabs() {
           />
         )}
         
-{loggedIn && (
+{!loggedIn && (
         <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
 
-        )}
-        {/* <Stack.Screen options={{ headerShown: false }}  name="Main" component={MainBottomTabs} /> */}
+        )} 
+        <Stack.Screen options={{ headerShown: false }}  name="Main" component={MainBottomTabs} />
          
       </Stack.Navigator>
   </NavigationContainer>
