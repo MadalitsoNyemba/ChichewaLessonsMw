@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Onboarding from 'react-native-onboarding-swiper';
-import {View,Image,Text} from 'react-native'
+import {Image} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Select, VStack, CheckIcon, Center, NativeBaseProvider } from "native-base";
+import { Select, Text, CheckIcon, View, NativeBaseProvider } from "native-base";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const languageOptions = [
     { label: 'English', value: 'en' },
     { label: 'Chichewa', value: 'ch' },
@@ -15,6 +17,64 @@ const languageOptions = [
         const handleLanguageSelect = (value) => {
             setSelectedLanguage(value);
           };
+
+          const OnboardingBody = ({title, subtitle,image}) => {
+
+            return(
+              <View>
+              <View>
+                <Text fontSize='3xl' color='white' bold>{title}</Text>
+                <Text fontSize='xl' color='white'>{subtitle}</Text>
+              </View>
+              <View mt={3}>
+                <Image
+                  style={{
+                    width: 350, height: 350,resizeMode: "contain",
+                  }}
+                  source={image}
+                />
+              </View>
+              </View>
+
+            )
+
+          }
+          const Done = ({ ...props }) => (
+            <Ionicons style={{padding:10}} name="ios-caret-forward-circle-outline" size={35} color="white" {...props} />
+           
+          );
+
+          const Next = ({...props }) => {
+
+            return(
+             <Text color="white" p={5} {...props}>Next
+              </Text>
+              
+
+            )
+
+          }
+          
+          const Dot = ({selected}) => {
+            let backgroundColor;
+         
+            return(
+              <View
+              style={{
+                backgroundColor : selected ? "white" : "#95B6FF",
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                marginLeft: 3,
+                marginRight: 3,
+                marginTop: 3,
+                marginBottom: 3
+              }}
+            />
+
+            )
+
+          }
         
           const FinalScreen = () => {
             let [language, setLanguage] = React.useState("en");
@@ -29,7 +89,8 @@ const languageOptions = [
                 }
 
             return (
-              <View>
+              <View mt={10}>
+                
                 <Select shadow={2} selectedValue={language} minWidth={200} accessibilityLabel="Choose Language" placeholder="Choose Language" _selectedItem={{
       bg: "teal.600",
       endIcon: <CheckIcon size="5" />
@@ -67,44 +128,45 @@ const languageOptions = [
 
     //Remove show skip as final page has mandate to select language
     showSkip = {false}
-
-
+    DotComponent = {Dot}
+    NextButtonComponent={Next}
+    DoneButtonComponent={Done}
         pages={[
         {
-            backgroundColor: '#ffffff',
+            backgroundColor: '#95B6FF',
+            
             image: (
-                <Image
-                  source={require("../assets/userOnboard.jpg")}
-                  resizeMode="contain"
-                  style={{ width: 300, height: 300 }}
-                />
+              <SafeAreaView>
+              <OnboardingBody title="Welcome" subtitle="Welcome to the Chichewa Lessons Malawi App." image={require("../assets/uob2.png")}/>
+
+              </SafeAreaView>
+             
               ),
-            title: 'Welcome',
-            subtitle: 'Welcome to the Chicewa Lessons Malawi App.',
+            title: '',
+            subtitle: '',
         },
         {
-            backgroundColor: '#ffffff',
+            backgroundColor: '#95B6FF',
             image: (
-                <Image
-                  source={require("../assets/user2Onboard.jpg")}
-                  resizeMode="contain"
-                  style={{ width: 300, height: 300 }}
-                />
+              <OnboardingBody title="Phunzilani" subtitle="Gwilitsani foni yanu kuphunzila Chichewa." image={require("../assets/uob.png")}/>
+              
               ),
-            title: 'Phunzilani',
-            subtitle: 'Gwilitsani foni yanu kuphunzila Chichewa.',
+            title: '',
+            subtitle: '',
         },
         {
-            backgroundColor: '#ffffff',
+            backgroundColor: '#95B6FF',
             image: (
-                <Image
-                  source={require("../assets/user3Onboard.jpg")}
-                  resizeMode="contain"
-                  style={{ width: 250, height: 250 }}
-                />
+              <SafeAreaView>
+                <OnboardingBody title="Welcome to Chichewa Lessons MW" subtitle="Choose the delivery language/Sankhani chiyankhulo" image={require("../assets/onBoarding.png")}/>
+                
+                <FinalScreen/>
+
+              </SafeAreaView>
+               
               ),
-            title: 'Choose language/Sankhani Chiyankhulo',
-            subtitle: <FinalScreen/>
+            title: '',
+            subtitle:'' 
         }
     ]}
 />

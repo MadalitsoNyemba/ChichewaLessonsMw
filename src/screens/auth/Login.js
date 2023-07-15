@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {  Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select } from "native-base";
+import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select,CheckIcon } from "native-base";
+import { MainContext,MainProvider } from '../../Context/MainContext';
 const Login = props => {
+    const {language, setLanguage, userName, setUserName, userLevel, setUserLevel} = useContext(MainContext);
+
     async function handleSignUp() {
+
+        AsyncStorage.setItem("userName", userName);
+        AsyncStorage.setItem("userLevel", userLevel);
+
         props.navigation.replace("Main")
 
     }
 
-    let [language, setLanguage] = React.useState("en");
     React.useEffect(() => {
         async function setData() {
-          
           const langData = await AsyncStorage.getItem("selectedLanguage");
           setLanguage(langData)
-         
         }
         setData();
       }, []);
@@ -43,30 +47,35 @@ const Login = props => {
         <VStack space={3} mt="3">
           <FormControl>
             <FormControl.Label>Name</FormControl.Label>
-            <Input />
+            <Input onChangeText={text => setUserName(text)}/>
           </FormControl>
-          <FormControl>
+          {/* <FormControl>
             <FormControl.Label>Phone Number</FormControl.Label>
             <Input/>
-          </FormControl>
-          <FormControl>
+          </FormControl> */}
+          {/* <FormControl>
             <FormControl.Label>School</FormControl.Label>
             <Select shadow={2} minWidth={200} accessibilityLabel="Choose Language" placeholder="Choose Language">
         <Select.Item shadow={2} label="English" value="en" />
         <Select.Item shadow={2} label="Chichewa" value="ch" />
 
       </Select>
-          </FormControl>
+          </FormControl> */}
 
-          <FormControl>
+          {/* <FormControl> */}
             <FormControl.Label>Level</FormControl.Label>
-            <Select shadow={2} minWidth={200} accessibilityLabel="Choose Language" placeholder="Choose Language">
-        <Select.Item shadow={2} label="English" value="en" />
-        <Select.Item shadow={2} label="Chichewa" value="ch" />
+            <Select shadow={2} minWidth={200} selectedValue={userLevel} accessibilityLabel="Choose Level" placeholder="Choose Level" _selectedItem={{
+      bg: "teal.600",
+      endIcon: <CheckIcon size="5" />
+    }}  onValueChange={itemValue => setUserLevel(itemValue)}>
+        <Select.Item shadow={2} label="PLSCE" value="PLSCE" />
+        <Select.Item shadow={2} label="JCE" value="JCE" />
+        <Select.Item shadow={2} label="MSCE" value="MSCE" />
+        <Select.Item shadow={2} label="Other" value="Other" />
 
       </Select>
-          </FormControl>
-          <Text>Yes, I agree</Text>
+          {/* </FormControl> */}
+          {/* <Text>Yes, I agree</Text> */}
           <Button mt="2" borderTopRadius={10} borderBottomLeftRadius={10} colorScheme="indigo" onPress={() => handleSignUp()}>
             Proceed
           </Button>
