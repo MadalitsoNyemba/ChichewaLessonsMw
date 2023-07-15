@@ -1,16 +1,21 @@
 import React, { useContext }  from 'react';
-import {  Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select, HStack,Pressable,CheckIcon } from "native-base";
+import { View, Flex,Box,ScrollView,VStack, FormControl, Image, Button, Center,Heading,Select, HStack,Pressable,CheckIcon,Text} from "native-base";
 import { MainContext,MainProvider } from '../../Context/MainContext';
 const Profile = ({navigation}) => {
     const {userName, userLevel,setUserLevel,language,setLanguage} = useContext(MainContext);
 
     return (
-      <View >
-        <View p={30} h={100} >
-        <Text >{userName}</Text>
-        </View>
+      <View bg="#95B6FF" >
+        <Center p={30} h={250} >
+        <Image
+                  style={{
+                    width: 100, height: 100,resizeMode: "contain",
+                  }}
+                  source={require("../../assets/usr.png")}
+                />
+        <Text color="white" fontSize="3xl">{userName}</Text>
+        </Center>
 
         
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import {  Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select, HStack,Pressable } from "native-base";
+import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select, HStack,Pressable,Text } from "native-base";
 const Detail = ({navigation}) => {
     let [language, setLanguage] = React.useState("en");
     React.useEffect(() => {
@@ -15,24 +14,24 @@ const Detail = ({navigation}) => {
       }, []);
 
     return (
-      <View >
+      <View bg="#95B6FF">
         <View p={30} h={100} >
-        <Text >Title</Text>
+        <Text color="white" fontSize="3xl">Title</Text>
         </View>
 
         
 
 
-        <ScrollView h="100%" border="1" borderTopRadius="30"  bg={["#fff"]} mt={3}>
+        <ScrollView h="90%" border="1" borderTopRadius="30"  bg={["#fff"]} mt={3} mb={5}>
 
-<Center w="100%" mt={5}>
-<View  w="100%" maxW="290" py="2">
-<Text>Title</Text>
-<Text>Descriptin</Text>
+<View p={5} >
+<Text color="grey" fontSize="xl">Description</Text>
+<Text fontSize="sm" mt={3} >
+Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description Description Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description DescriptionDescription Description Description Description DescriptionDescription Description Description Description Description
+</Text>
 
 </View>
       
-    </Center>
       
 
       

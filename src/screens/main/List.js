@@ -1,9 +1,16 @@
 import React from 'react';
-import {   Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select, HStack,Pressable } from "native-base";
+import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Center,Heading,Select, HStack,Pressable,Text } from "native-base";
+import Lesson from '../../components/Lesson';
+import { useQuery } from "@apollo/client";
+import { LESSONS_QUERY } from "../../gql/Query";
 const List = props => {
+  const { data, loading } = useQuery(LESSONS_QUERY);
     let [language, setLanguage] = React.useState("en");
+
+    // let lessons = data.lessons.filter((item) => item.level == userLevel)
+    let lessons = data.lessons
+    console.log(data)
     React.useEffect(() => {
         async function setData() {
           
@@ -15,33 +22,24 @@ const List = props => {
       }, []);
 
     return (
-      <View >
+      <View  bg="#95B6FF" >
         <View pt={10} pl={6}>
-        <Text>Selected Topic</Text>
+        <Text color="white" fontSize="xl">Selected Topic</Text>
         </View>
 
         
 
 
-        <ScrollView h="100%" border="1" borderTopRadius="30"  bg={["#fff"]} mt={3}>
+        <ScrollView h="100%" border="1" borderTopRadius="30" p={5} bg={["#fff"]} mt={4}>
 
 <Pressable  onPress={() => props.navigation.navigate("Detail")}>
-<Center w="100%" mt={5}>
-<View  bg="primary.300" rounded="md" shadow={3} safeArea p="2" w="90%" maxW="290" py="5">
-<HStack justifyContent="space-between" >
-    <View>
-        <VStack>
-            <Text>Hey</Text>
-            <Text>Hey</Text>
-        </VStack>
-    </View>
-    <Text>Here</Text>
 
-</HStack>
+{
+      lessons.map((lesson)=>
+      <Lesson lesson={lesson}/>
+      )
+    }
 
-                    </View>
-      
-    </Center>
     </Pressable>
       
 
