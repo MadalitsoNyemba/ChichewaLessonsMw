@@ -1,0 +1,51 @@
+{"English":{
+  "login": {
+    "signUp":"Sign Up",
+    "name":"Enter your name",
+    "level":"Choose your level",
+    "proceed":"Proceed",
+    "fill":"Fill all fields",
+    "provide":"Please provide your name and choose leve"
+  },
+  "home": {
+    "welcome":"Welcome",
+    "topicsFor":"Topics For",
+    "recommendations":"Recommendations",
+    "level":"Choose your level",
+    "proceed":"Proceed"
+  },
+
+  "detail": {
+    "description":"Description"
+  },
+  "profile": {
+    "language":"Choose your language",
+    "level":"Choose your level"
+  }
+},
+"Chichewa":{
+  "login": {
+    "signUp":"Lembetsani",
+    "name":"Lembani dzina lanu",
+    "level":"Sankhani kalasi yanu",
+    "proceed":"Pitililani",
+    "fill":"Lembani monse moyenelela",
+    "provide":"Wonetsetsani kuti mwalemba dzina lanu komaso mwasankha kalasi"
+  },
+  "home": {
+    "welcome":"Takulandilani",
+    "topicsFor":"Topiki ya",
+    "recommendations":"Maganizo",
+    "level":"Sankhani kalasi yanu",
+    "proceed":"Pitililani"
+  },
+
+  "detail": {
+    "description":"Kutambasula"
+  },
+  "profile": {
+    "language":"Sankhani chiyankhulo",
+    "level":"Sankhani kalasi yanu"
+  }
+}
+}

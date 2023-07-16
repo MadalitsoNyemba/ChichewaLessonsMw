@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -11,6 +11,7 @@ import Profile from '../screens/main/Profile';
 import OnboardingScreen from '../screens/OnBoarding';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import { MainContext, MainProvider } from '../Context/MainContext';
 
 const Stack = createNativeStackNavigator();
 const AuthStack = createNativeStackNavigator();
@@ -18,12 +19,12 @@ const AuthStack = createNativeStackNavigator();
 
 
 const MainStack = createNativeStackNavigator();
-function MainStackScreen({ route,navigation }) {
+function MainStackScreen({ route, navigation }) {
   return (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
-      <MainStack.Screen name="Home" component={Home}  />
-      <MainStack.Screen name="List" component={List}  />
-      <MainStack.Screen name="Detail" component={Detail}  />
+      <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen name="List" component={List} />
+      <MainStack.Screen name="Detail" component={Detail} />
     </MainStack.Navigator>
   );
 }
@@ -32,9 +33,9 @@ const Tab = createBottomTabNavigator();
 
 function MainBottomTabs() {
   return (
-    <Tab.Navigator 
-    // screenOptions={{ headerShown: false }}
-    screenOptions={({ route }) => ({
+    <Tab.Navigator
+      // screenOptions={{ headerShown: false }}
+      screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -52,7 +53,7 @@ function MainBottomTabs() {
         tabBarActiveTintColor: '#3D3270',
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: false,
-        headerShown: false 
+        headerShown: false
       })}
     >
       <Tab.Screen name="Home" component={MainStackScreen} />
@@ -61,57 +62,62 @@ function MainBottomTabs() {
   );
 }
 
- const AppNavigator = () => {
+const AppNavigator = props => {
 
-    const [firstLaunch, setFirstLaunch] = React.useState(null);
+    const { loggedIn, setLoggedIn,firstLaunch, setFirstLaunch } = useContext(MainContext);
+  React.useEffect(() => {
+    async function setData() {
 
-    const [loggedIn, setLoggedIn] = React.useState(null);
+      const appData = await AsyncStorage.getItem("appLaunched");
+      const loginData = await AsyncStorage.getItem("userName");
+      console.log("appData:"  + appData)
 
-    React.useEffect(() => {
-      async function setData() {
-        
-        const appData = await AsyncStorage.getItem("appLaunched");
-        const loginData = await AsyncStorage.getItem("userName");
-
-        if (appData == null) {
-          setFirstLaunch(true);
-          AsyncStorage.setItem("appLaunched", "false");
-        } else {
-          setFirstLaunch(false);
-        }
-
-        if (loginData == null) {
-            setLoggedIn(false);
-          } else {
-            setLoggedIn(true);
-          }
+      if (appData == null) {
+        setFirstLaunch(true);
+        AsyncStorage.setItem("appLaunched", "false");
+      } else {
+        setFirstLaunch(false);
       }
-      setData();
-    }, []);
-    // console.log(firstLaunch)
 
-    return (
-        firstLaunch != null && (
-  <NavigationContainer>
-    <Stack.Navigator>
-        {firstLaunch && (
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="OnboardingScreen"
-            component={OnboardingScreen}
-          />
-        )}
-        
-{!loggedIn && (
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
+      if (loginData == null) {
+        setLoggedIn(false);
+      } else {
+        setLoggedIn(true);
+      }
 
-        )} 
-        <Stack.Screen options={{ headerShown: false }}  name="Main" component={MainBottomTabs} />
-         
-      </Stack.Navigator>
-  </NavigationContainer>
+
+    }
+    setData();
+
+  }, []);
+  // console.log(loggedIn)
+
+  return (
+    firstLaunch != null && (
+      <NavigationContainer>
+        <Stack.Navigator>
+          
+          {loggedIn ?(
+            <Stack.Screen options={{ headerShown: false }} name="Main" component={MainBottomTabs} />
+           ):(
+
+            firstLaunch ? (
+              <Stack.Screen
+                options={{ headerShown: false }}
+                name="OnboardingScreen"
+                component={OnboardingScreen}
+              />
+            ):(
+
+          <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />)
+           )} 
+
+
+
+        </Stack.Navigator>
+      </NavigationContainer>
     )
-    )
+  )
 };
 
 

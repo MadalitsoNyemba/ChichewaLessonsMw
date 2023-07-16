@@ -25,7 +25,9 @@ const Topic = ({topic, props}) => {
       };
     
     return(
-        <Pressable  onPress={() => props.navigation.navigate("List")}>
+        <Pressable  onPress={() => props.navigation.navigate("List",{
+          topicName:topic.topic
+          })}>
         <LinearGradient
   start={{x: 0, y: 0}}
   end={{x: 1, y: 0}}
@@ -37,7 +39,7 @@ const Topic = ({topic, props}) => {
     height:80
     }}>
         <HStack justifyContent="space-between"> 
-        <Text color="white" fontSize="sm" numberOfLines={2} style={{width:60}} mt={3} >asdadas sdsdf</Text>
+        <Text color="white" fontSize="sm" numberOfLines={3} style={{width:80}} mt={3} >{topic.topic}</Text>
         <Image
           style={{
             width: 100, height: 100,resizeMode: "contain"

@@ -6,18 +6,23 @@ import { View,Image, Flex,Box,ScrollView,VStack, FormControl, Input, Button, Cen
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Lesson = ({lesson}) => {
+const Lesson = ({lesson, props}) => {
     return(
+<Pressable  onPress={() => props.navigation.navigate("Detail",{
+  lessonName:lesson.lessonName,
+  content:lesson.content.html
+})}>
+
 <View mb={3}>
         <View  bg="white" rounded="lg"  style={styles.card} >
 <HStack p={4} justifyContent="space-between">
     <View>
         <VStack space={3}>
-            <Text fontSize="md">{lesson.topic}</Text>
+            <Text fontSize="md">{lesson.lessonName}</Text>
             <View mt={2}>
                 <HStack space={2}>
                 <Ionicons name="ios-star" size={15} color="gold" /> 
-            <Text fontSize="xs" color="grey">{lesson.lessonName}</Text>
+            <Text fontSize="xs" color="grey">{lesson.topic}</Text>
             <Text fontSize="xs" color="grey">{'\u2B24'}</Text>
             <Text fontSize="xs" color="grey">{lesson.level}</Text>
 
@@ -36,6 +41,7 @@ const Lesson = ({lesson}) => {
 
                     </View>
         </View>
+        </Pressable>
     )
 }
 const styles = {
